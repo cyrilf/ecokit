@@ -21,7 +21,7 @@ config.set('coverage_reporters', [
   { type : 'html', dir : 'coverage' }
 ]);
 
-config.set('server_host',  'localhost');
+config.set('server_host',  '0.0.0.0');
 config.set('server_port',  process.env.PORT || 3000);
 
 // Define what dependencies we'd like to treat as vendor dependencies,
