@@ -20,6 +20,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   actions : bindActionCreators(counterActions, dispatch)
 });
+
+const lookup = (query) =>
+  items => items.filter(item => item.name.toLowerCase().indexOf(query) !== -1);
+
 export class HomeView extends React.Component {
   static propTypes = {
     actions  : React.PropTypes.object,
@@ -27,12 +31,15 @@ export class HomeView extends React.Component {
   }
 
   render () {
+    const { ecokit, ecokitLibrary } = this.props;
+    const filteredEcokitLibrary = lookup(ecokit)(ecokitLibrary);
+
     return (
       <div className='container text-center'>
         <h1>Ecokit</h1>
         <hr />
-        <h2>{this.props.ecokitLibrary.length} fruits/vegetables</h2>
-        <EcokitLibrary ecokitsItems={this.props.ecokitLibrary} />
+        <h2>{ecokitLibrary.length} fruits/vegetables</h2>
+        <EcokitLibrary ecokitsItems={filteredEcokitLibrary} />
 
         <hr />
         <h2>Sample Counter: {this.props.counter}</h2>
