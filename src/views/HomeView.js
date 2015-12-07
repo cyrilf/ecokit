@@ -2,7 +2,7 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import counterActions         from 'actions/counter';
-import ecokitActions          from 'actions/ecokit';
+// import ecokitActions          from 'actions/ecokit';
 import { Link }               from 'react-router';
 import EcokitLibrary          from 'components/EcokitLibrary';
 
@@ -18,7 +18,7 @@ const mapStateToProps = (state) => ({
   routerState: state.router
 });
 const mapDispatchToProps = (dispatch) => ({
-  actions : bindActionCreators(ecokitActions, counterActions, dispatch)
+  actions : bindActionCreators(counterActions, dispatch)
 });
 export class HomeView extends React.Component {
   static propTypes = {
