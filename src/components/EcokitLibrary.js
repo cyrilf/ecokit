@@ -17,6 +17,7 @@ export default class EcokitLibrary extends React.Component {
 EcokitLibrary.propTypes = {
   ecokitsItems: React.PropTypes.arrayOf(React.PropTypes.shape({
       name: React.PropTypes.string.isRequired,
-      type: React.PropTypes.string.isRequired
+      type: React.PropTypes.string.isRequired,
+      pictures: React.PropTypes.array
   }).isRequired).isRequired
 };

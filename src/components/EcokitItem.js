@@ -3,8 +3,18 @@ import React from 'react';
 export default class EcokitItem extends React.Component {
 
   render () {
+    const hasPicture = this.props.pictures &&
+                       this.props.pictures.length;
+    let renderPicture = '';
+    if (hasPicture) {
+        renderPicture = <img src={this.props.pictures[0]} />;
+    }
+
     return (
-        <li>{this.props.name} ({this.props.type})</li>
+        <li>
+          {renderPicture}
+          <h3>{this.props.name} <small>({this.props.type})</small></h3>
+        </li>
     );
   }
 }
