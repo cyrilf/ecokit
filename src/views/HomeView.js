@@ -2,9 +2,10 @@ import React                  from 'react';
 import { bindActionCreators } from 'redux';
 import { connect }            from 'react-redux';
 import counterActions         from 'actions/counter';
-// import ecokitActions          from 'actions/ecokit';
+import * as ecokitActions          from 'actions/ecokit';
 import { Link }               from 'react-router';
 import EcokitLibrary          from 'components/EcokitLibrary';
+import EcokitSearchInput      from 'components/EcokitSearchInput';
 
 // We define mapStateToProps and mapDispatchToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -13,15 +14,15 @@ import EcokitLibrary          from 'components/EcokitLibrary';
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
   counter: state.counter,
-  ecokit: state.ecokit,
+  ecokitSearch: state.ecokitSearch,
   ecokitLibrary: state.ecokitLibrary,
   routerState: state.router
 });
 const mapDispatchToProps = (dispatch) => ({
-  actions : bindActionCreators(counterActions, dispatch)
+  actions : bindActionCreators(ecokitActions, dispatch)
 });
 
-const lookup = (query) =>
+const lookup = (query = '') =>
   items => items.filter(item => item.name.toLowerCase().indexOf(query) !== -1);
 
 export class HomeView extends React.Component {
@@ -31,14 +32,17 @@ export class HomeView extends React.Component {
   }
 
   render () {
-    const { ecokit, ecokitLibrary } = this.props;
-    const filteredEcokitLibrary = lookup(ecokit)(ecokitLibrary);
+    const { ecokitSearch, ecokitLibrary } = this.props;
+    const filteredEcokitLibrary = lookup(ecokitSearch)(ecokitLibrary);
 
     return (
       <div className='container text-center'>
         <h1>Ecokit</h1>
         <hr />
         <h2>{ecokitLibrary.length} fruits/vegetables</h2>
+        <EcokitSearchInput query={ecokitSearch}
+          onSearch={this.props.actions.search.bind(this)}
+          placeholder="Search..."/>
         <EcokitLibrary ecokitsItems={filteredEcokitLibrary} />
 
         <hr />

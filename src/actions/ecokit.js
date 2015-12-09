@@ -1,5 +1,5 @@
 import { ECOKIT_SEARCH } from 'constants/ecokit';
 
-export default {
-  search: (query) => ({ type : ECOKIT_SEARCH, query })
+export function search(query) {
+  return { type : ECOKIT_SEARCH, query };
 };

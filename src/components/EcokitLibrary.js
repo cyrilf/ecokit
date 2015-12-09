@@ -7,7 +7,7 @@ export default class EcokitLibrary extends React.Component {
     return (
         <ul>
           {this.props.ecokitsItems.map(ecokitItem =>
-            <EcokitItem {...ecokitItem} />
+            <EcokitItem key={ecokitItem.id} {...ecokitItem} />
           )}
         </ul>
     );
@@ -16,6 +16,7 @@ export default class EcokitLibrary extends React.Component {
 
 EcokitLibrary.propTypes = {
   ecokitsItems: React.PropTypes.arrayOf(React.PropTypes.shape({
+      id: React.PropTypes.number.isRequired,
       name: React.PropTypes.string.isRequired,
       type: React.PropTypes.string.isRequired,
       pictures: React.PropTypes.array
